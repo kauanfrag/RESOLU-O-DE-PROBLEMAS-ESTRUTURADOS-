@@ -1,5 +1,4 @@
-/* Main: orquestra os experimentos e imprime o CSV.
-   Estilo intencionalmente simples, nomes em português e comentários mínimos. */
+
 public class Main {
     // tamanhos de tabela (fixos)
     public static final int M1 = 1009;
@@ -22,7 +21,6 @@ public class Main {
     public static final String H_MUL = "H_MUL";
     public static final String H_FOLD = "H_FOLD";
 
-    // LCG simples interno (reprodutível)
     public static class GeradorLCG {
         private long estado;
         private final long a = 1664525L;
@@ -39,7 +37,7 @@ public class Main {
             return (int) v;
         }
 
-        // embaralha as primeiras 'tamanho' posições do array
+
         public void embaralhar(int[] arr, int tamanho) {
             int i = tamanho - 1;
             while (i > 0) {
@@ -123,7 +121,7 @@ public class Main {
                             FuncoesHash fhash = new FuncoesHash(m);
                             Registro[] baldes = new Registro[m];
 
-                            // auditoria exigida: imprimir etiqueta antes de inserir (stderr)
+                     
                             System.err.println(funcLabel + " m=" + m + " seed=" + seed);
 
                             // coleta dos primeiros 10 h(k) para checksum
