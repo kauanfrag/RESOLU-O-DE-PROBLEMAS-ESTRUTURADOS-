@@ -16,13 +16,13 @@ public class FuncoesHash {
         return r;
     }
 
-    // multiplicação: h(k) = floor(m * frac(k * A))
+
     public int hMul(int k) {
         double prod = k * A;
-        long parte = (long) prod;          // parte inteira
-        double frac = prod - parte;       // parte fracionária
+        long parte = (long) prod;          
+        double frac = prod - parte;      
         double val = this.m * frac;
-        int idx = (int) val;              // truncamento
+        int idx = (int) val;             
         if (idx < 0) {
             idx = 0;
         }
@@ -32,7 +32,7 @@ public class FuncoesHash {
         return idx;
     }
 
-    // dobramento
+
     public int hFold(int k) {
         int soma = 0;
         int resto = k;
