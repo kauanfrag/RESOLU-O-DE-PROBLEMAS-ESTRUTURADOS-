@@ -62,7 +62,7 @@ public class Main {
 
         int im = 0;
         while (im < 3) {
-            int m = ms[im]
+            int m = ms[im];
 
             int in = 0;
             while (in < 3) {
