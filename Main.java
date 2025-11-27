@@ -1,16 +1,16 @@
 
 public class Main {
-    // tamanhos de tabela (fixos)
+    // tamanhos de tabela 
     public static final int M1 = 1009;
     public static final int M2 = 10007;
     public static final int M3 = 100003;
 
-    // tamanhos de dataset (fixos)
+    // tamanhos de dataset
     public static final int N1 = 1000;
     public static final int N2 = 10000;
     public static final int N3 = 100000;
 
-    // seeds públicas
+    // seeds 
     public static final long SEED1 = 137L;
     public static final long SEED2 = 271828L;
     public static final long SEED3 = 314159L;
@@ -52,7 +52,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        // cabeçalho CSV (ordem e nomes exigidos)
+        // cabeçalho CSV 
         System.out.println("m,n,func,seed,ins_ms,coll_tbl,coll_lst,find_ms_hits,find_ms_misses,cmp_hits,cmp_misses,checksum");
 
         int[] ms = new int[] { M1, M2, M3 };
@@ -72,7 +72,7 @@ public class Main {
                 while (iseed < 3) {
                     long seed = seeds[iseed];
 
-                    // gerar dataset reprodutível com LCG
+                   
                     GeradorLCG ger = new GeradorLCG(seed);
                     int[] dados = new int[n];
                     int ii = 0;
@@ -85,7 +85,7 @@ public class Main {
                     while (ifunc < 3) {
                         String funcLabel = funcoes[ifunc];
 
-                        // acumuladores para médias
+                    
                         long somaInsMs = 0L;
                         long somaFindHitsMs = 0L;
                         long somaFindMissesMs = 0L;
@@ -93,11 +93,11 @@ public class Main {
                         long somaCollLst = 0L;
                         long somaCmpHits = 0L;
                         long somaCmpMisses = 0L;
-                        int checksumAuditoria = 0; // será definido na primeira repetição
+                        int checksumAuditoria = 0; 
 
                         int rep = 0;
                         while (rep < REPETICOES) {
-                            // warm-up curto (somente na 1ª repetição)
+                        
                             if (rep == 0) {
                                 FuncoesHash warm = new FuncoesHash(101);
                                 Registro[] tmp = new Registro[101];
@@ -124,7 +124,7 @@ public class Main {
                      
                             System.err.println(funcLabel + " m=" + m + " seed=" + seed);
 
-                            // coleta dos primeiros 10 h(k) para checksum
+                        
                             int[] primeirosHK = new int[10];
                             int cntPrimeiros = 0;
 
@@ -147,18 +147,18 @@ public class Main {
                                     }
                                 }
 
-                                // registrar primeiros 10 h(k) (ordem de geração)
+                        
                                 if (cntPrimeiros < 10) {
                                     primeirosHK[cntPrimeiros] = pos;
                                     cntPrimeiros = cntPrimeiros + 1;
                                 }
 
-                                // colisão na tabela?
+                        
                                 if (baldes[pos] != null) {
                                     coll_tbl = coll_tbl + 1;
                                 }
 
-                                // inserir no final da lista
+                        
                                 if (baldes[pos] == null) {
                                     baldes[pos] = new Registro(codigo);
                                 } else {
@@ -173,7 +173,7 @@ public class Main {
                                 }
 
                                 j = j + 1;
-                            } // fim inserção
+                            } 
 
                             long t1 = System.nanoTime();
                             long insMs = (t1 - t0) / 1000000L;
@@ -181,7 +181,7 @@ public class Main {
                             somaCollTbl = somaCollTbl + coll_tbl;
                             somaCollLst = somaCollLst + coll_lst;
 
-                            // checksum segundo enunciado: soma dos primeiros 10 h(k)*h(k) mod 1000003
+                        
                             long somaHh = 0L;
                             int p = 0;
                             while (p < cntPrimeiros) {
@@ -193,17 +193,17 @@ public class Main {
                             if (checksum < 0) {
                                 checksum = checksum + 1000003;
                             }
-                            // definir auditoria (usar os primeiros 10 da primeira repetição)
+                        
                             if (rep == 0) {
                                 checksumAuditoria = checksum;
                             }
 
-                            // preparar lote: 50% hits (amostragem por stride) e 50% misses (garantidos ausentes)
+                        
                             int nBusca = n;
                             int metade = nBusca / 2;
                             int[] lote = new int[nBusca];
 
-                            // hits por stride
+                    
                             int step = 1;
                             if (metade > 0) {
                                 step = n / metade;
@@ -222,7 +222,7 @@ public class Main {
                                 ph = ph + 1;
                             }
 
-                            // misses gerados com LCG variante e verificados por varredura linear
+                           
                             GeradorLCG gerBusca = new GeradorLCG(seed + rep + 7);
                             int q = metade;
                             while (q < nBusca) {
@@ -244,10 +244,10 @@ public class Main {
                                 }
                             }
 
-                            // embaralhar lote
+                            // embaralhar 
                             gerBusca.embaralhar(lote, nBusca);
 
-                            // separar hits e misses consultando a tabela
+                      
                             int[] hits = new int[nBusca];
                             int[] misses = new int[nBusca];
                             int idxHits = 0;
@@ -284,7 +284,7 @@ public class Main {
                                 rindex = rindex + 1;
                             }
 
-                            // medir hits (tempo e comparações)
+                       
                             long th0 = System.nanoTime();
                             long cmpHitsLocal = 0L;
                             int hv = 0;
@@ -315,7 +315,7 @@ public class Main {
                             somaFindHitsMs = somaFindHitsMs + hitsMs;
                             somaCmpHits = somaCmpHits + cmpHitsLocal;
 
-                            // medir misses (tempo e comparações)
+                    
                             long tm0 = System.nanoTime();
                             long cmpMissesLocal = 0L;
                             int mv = 0;
@@ -347,9 +347,9 @@ public class Main {
                             somaCmpMisses = somaCmpMisses + cmpMissesLocal;
 
                             rep = rep + 1;
-                        } // fim repetições
+            
 
-                        // médias pedidas
+            
                         long mediaInsMs = somaInsMs / REPETICOES;
                         long mediaHitsMs = somaFindHitsMs / REPETICOES;
                         long mediaMissesMs = somaFindMissesMs / REPETICOES;
@@ -358,11 +358,10 @@ public class Main {
                         long mediaCmpHits = somaCmpHits / REPETICOES;
                         long mediaCmpMisses = somaCmpMisses / REPETICOES;
 
-                        // checksum legítimo: usei o calculado na primeira repetição (checksumAuditoria)
-                        // observação: ele foi definido durante a 1ª repetição
+                
                         int checksum = checksumAuditoria;
 
-                        // imprimir CSV (ordem exata)
+                        // imprimir CSV
                         String linha = "" + m + "," + n + "," + funcLabel + "," + seed + "," +
                                 mediaInsMs + "," + mediaCollTbl + "," + mediaCollLst + "," +
                                 mediaHitsMs + "," + mediaMissesMs + "," +
@@ -370,13 +369,13 @@ public class Main {
                         System.out.println(linha);
 
                         ifunc = ifunc + 1;
-                    } // fim funcoes
+                    } 
 
                     iseed = iseed + 1;
-                } // fim seeds
+                } 
                 in = in + 1;
-            } // fim ns
+            }
             im = im + 1;
-        } // fim ms
+        } 
     }
 }
