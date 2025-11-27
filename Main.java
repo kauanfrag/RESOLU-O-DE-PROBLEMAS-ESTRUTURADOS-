@@ -246,7 +246,6 @@ public class Main {
 
                             // embaralhar 
                             gerBusca.embaralhar(lote, nBusca);
-
                       
                             int[] hits = new int[nBusca];
                             int[] misses = new int[nBusca];
