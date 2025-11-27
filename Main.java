@@ -8,7 +8,7 @@ public class Main {
     // tamanhos de dataset
     public static final int N1 = 1000;
     public static final int N2 = 10000;
-    public static final int N3 = 100000
+    public static final int N3 = 100000;
 
     // seeds 
     public static final long SEED1 = 137L;
