@@ -3,7 +3,7 @@ public class Main {
     // tamanhos de tabela 
     public static final int M1 = 1009;
     public static final int M2 = 10007;
-    public static final int M3 = 100003;
+    public static final int M3 = 100003
 
     // tamanhos de dataset
     public static final int N1 = 1000;
