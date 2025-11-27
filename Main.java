@@ -155,7 +155,7 @@ public class Main {
 
                         
                                 if (baldes[pos] != null) {
-                                    coll_tbl = coll_tbl + 1;
+                                    coll_tbl = coll_tbl + 1
                                 }
 
                         
