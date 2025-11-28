@@ -13,4 +13,4 @@ Arquivos principais
 javac Main.java FuncoesHash.java Registro.java
 
 Professor verificar relatório que está postado aqui também por favor.
-Link para youtube: 
+Link para youtube: https://youtu.be/YDRsIravsQQ
